@@ -64,6 +64,7 @@ grass1 = ImageTk.PhotoImage(grass1_size)
 block_grass1 = canvas.create_image(200,650, image=grass1)
 
 
+
 def check_movement(dx=0, dy=0, checkGround=False):
     coord = canvas.coords(player)
     platforms = canvas.find_withtag("PLATFORM")
