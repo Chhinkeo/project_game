@@ -32,7 +32,7 @@ frame.pack()
 canvas = tk.Canvas(frame, width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
 canvas.pack()
 
-# ------------- Game --------------------------
+# ----------------- Game --------------------------
 canvas.create_rectangle(0,800,SCREEN_WIDTH,SCREEN_HEIGHT,fill="black",tags="PLATFORM")
 
 bg = Image.open("image/bg2.jpg")
