@@ -6,7 +6,7 @@ SCREEN_WIDTH = 1536
 SCREEN_HEIGHT = 700
 
 GRAVITY_FORCE = 9
-JUMP_FORCE = 23
+JUMP_FORCE = 20
 SPEED = 6
 
 TIMED_LOOP = 10
@@ -35,12 +35,12 @@ canvas.pack()
 # ------------- Game --------------------------
 canvas.create_rectangle(0,800,SCREEN_WIDTH,SCREEN_HEIGHT,fill="black",tags="PLATFORM")
 
-bg = Image.open("bg2.jpg")
+bg = Image.open("image/bg2.jpg")
 image_size = bg.resize((SCREEN_WIDTH,SCREEN_HEIGHT))
 image = ImageTk.PhotoImage(image_size)
 canvas.create_image(600,350, image=image)
 
-profile_file = Image.open("profile.png")
+profile_file = Image.open("image/profile.png")
 profile_size = profile_file.resize((125, 75))
 profile = ImageTk.PhotoImage(profile_size)
 profile_player = canvas.create_image(80, 80, image = profile)
@@ -51,19 +51,38 @@ green_hp = canvas.create_rectangle(150,65,FULL_HP,90, fill="#00dc00")
 nb_dm = canvas.create_text(100, 150, text = "Diamond: ", fill="white", font=("Irish Grover", 20))
 nb = canvas.create_text(175,150, text = DIAMOND, fill = "white", font = ("Irish Grover", 20))
 
-play_file = Image.open("ninja_right.png")
+play_file = Image.open("image/ninja_right.png")
 play_size = play_file.resize((55, 55))
 play = ImageTk.PhotoImage(play_size)
-player = canvas.create_image(100, 150, image=play)
+player = canvas.create_image(150, 150, image=play)
+
+play_left_file = Image.open("image/ninja_left.png")
+play_left_size = play_left_file.resize((55, 55))
+play_left = ImageTk.PhotoImage(play_left_size)
+
+d1_file = Image.open("image/diamond.png")
+d1_size = d1_file.resize((35,35))
+d1 = ImageTk.PhotoImage(d1_size)
+dm1 = canvas.create_image(490,560, image=d1)
 
 #------------------grass block---------------------------------
-canvas.create_rectangle(120,660,275,661, fill="black", tags = "PLATFORM")
-grass1_file = Image.open("grass.png")
-grass1_size = grass1_file.resize((200,65))
+grass1_file = Image.open("image/grass.png")
+grass1_size = grass1_file.resize((200,70))
 grass1 = ImageTk.PhotoImage(grass1_size)
-block_grass1 = canvas.create_image(200,650, image=grass1)
+block_grass1 = canvas.create_image(200,650, image=grass1, tags = "PLATFORM")
 
+grass2_file = Image.open("image/grass.png")
+grass2_size = grass2_file.resize((200,70))
+grass2 = ImageTk.PhotoImage(grass2_size)
+block_grass2 = canvas.create_image(450,595, image=grass2, tags = "PLATFORM")
 
+#----------------challange------------------------------
+thorns1_file = Image.open("image/thorns.png")
+thorns1_size = thorns1_file.resize((200,40))
+thorns1 = ImageTk.PhotoImage(thorns1_size)
+canvas.create_image(350,675, image=thorns1)
+
+#-----------------function-------------------------------
 
 def check_movement(dx=0, dy=0, checkGround=False):
     coord = canvas.coords(player)
@@ -73,9 +92,9 @@ def check_movement(dx=0, dy=0, checkGround=False):
         return False
 
     if checkGround:
-        overlap = canvas.find_overlapping(coord[0], coord[1], coord[0]+play.width() , coord[1]+play.height() + dy)
+        overlap = canvas.find_overlapping(coord[0], coord[1], coord[0]+20+ dx , coord[1]+ 20 + dy)
     else:
-        overlap = canvas.find_overlapping(coord[0]+dx, coord[1]+dy, coord[0]+dx, coord[1]+play.width())
+        overlap = canvas.find_overlapping(coord[0]+dx, coord[1]+dy, coord[0] - dx, coord[1] - play.width())
 
     for platform in platforms:
         if platform in overlap:
@@ -98,8 +117,10 @@ def move():
     if not keyPressed == []:
         x = 0
         if "Left" in keyPressed:
+            canvas.itemconfig(player, image=play_left)
             x -= SPEED
         if "Right" in keyPressed:
+            canvas.itemconfig(player, image=play)
             x += SPEED
         if "space" in keyPressed and not check_movement(0, GRAVITY_FORCE, True):
             jump(JUMP_FORCE)
