@@ -33,7 +33,7 @@ canvas.pack()
 #----Game_Level-1-----#
 canvas.create_rectangle(0,800,SCREEN_WIDTH, SCREEN_HEIGHT, fill="black", tags="PLATFORM")
 
-bg = Image.open("image/bg_level1.png")
+bg = Image.open("image/bg_l1.png")
 bg_size = bg.resize((SCREEN_WIDTH,SCREEN_HEIGHT))
 image = ImageTk.PhotoImage(bg_size)
 canvas.create_image(600,350, image=image)
@@ -116,14 +116,15 @@ grass7_size = grass7_file.resize((250,70))
 grass7 = ImageTk.PhotoImage(grass7_size)
 block_grass7 = canvas.create_image(1280,380, image=grass7, tags = "PLATFORM")
 
+grass8_file = Image.open("image/grass.png")
+grass8_size = grass8_file.resize((150,60))
+grass8 = ImageTk.PhotoImage(grass8_size)
+block_grass8 = canvas.create_image(250,340, image=grass8, tags = "PLATFORM")
+
 
 #------challange---------
 
-# thorn_file = Image.open("image/thorn2.png")
-# thorn_size = thorn_file.resize((3000,2000))
-# thorn = ImageTk.PhotoImage(thorn_size)
-# canvas.create_image(0,650, image=thorn)
-
+canvas.create_rectangle(0,696,SCREEN_WIDTH, SCREEN_HEIGHT, fill="red", tags="PLATFORM")
 
 bomp1_file = Image.open("image/bomp1.png")
 bomp_size = bomp1_file.resize((50,50))
@@ -148,12 +149,17 @@ canvas.create_image(630,450, image=thorn1)
 thorn2_file = Image.open("image/thorns 1.png")
 thorn2_size = thorn2_file.resize((60,60))
 thorn2 = ImageTk.PhotoImage(thorn2_size)
-canvas.create_image(850,570, image=thorn2)
+canvas.create_image(840,570, image=thorn2)
 
 thorn3_file = Image.open("image/thorns 1.png")
 thorn3_size = thorn3_file.resize((60,60))
 thorn3 = ImageTk.PhotoImage(thorn3_size)
 canvas.create_image(1200,460, image=thorn3)
+
+thorn4_file = Image.open("image/thorns 1.png")
+thorn4_size = thorn4_file.resize((40,40))
+thorn4 = ImageTk.PhotoImage(thorn4_size)
+canvas.create_image(310,300, image=thorn4)
 
 #----------------function--------------
 
