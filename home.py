@@ -1,4 +1,5 @@
 import tkinter as tk
+import os 
 from PIL import Image, ImageTk
 
 # ------------- Constants ---------------------
@@ -31,9 +32,17 @@ canvas.create_image(600,450, image=image)
 title = Image.open("image/name_game.png")
 i = ImageTk.PhotoImage(title)
 canvas.create_image(400,150, image=i)
-# canvas.create_text(380, 130, text="NINJA's Advanture", fill="white", font=("Irish Grover", 50))
 
-# play_btn = tk.Button(300,500, text="PLAY NOW", command="level1.py", bg="#733700")
-# play_btn.pack()
+# def btn1_click():
+#     canvas.create_rectangle(10,10,100,100,fill='red')
+# canvas.tag_bind("btn", "<Button-1>", btn1_click) 
+# canvas.create_image(680,540,image=btn1_click, tags="btn")
+
+
+btn = Image.open("image/btn_play.png")
+btn_size = btn.resize((300,100))
+btn1 = ImageTk.PhotoImage(btn_size)
+btn_click = canvas.create_image(400,300, image = btn1)
+
 
 window.mainloop()
