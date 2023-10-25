@@ -1,5 +1,5 @@
 import tkinter as tk
-from PIL import Image , ImageTk
+from PIL import Image, ImageTk
 
 # ------------- Constants ---------------------
 SCREEN_WIDTH = 1536
@@ -33,23 +33,23 @@ canvas = tk.Canvas(frame, width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
 canvas.pack()
 
 # ----------------- Game --------------------------
-canvas.create_rectangle(0,800,SCREEN_WIDTH,SCREEN_HEIGHT,fill="black",tags="PLATFORM")
+canvas.create_rectangle(0, 800, SCREEN_WIDTH, SCREEN_HEIGHT, fill="black", tags="PLATFORM")
 
 bg = Image.open("image/bg2.jpg")
-image_size = bg.resize((SCREEN_WIDTH,SCREEN_HEIGHT))
+image_size = bg.resize((SCREEN_WIDTH, SCREEN_HEIGHT))
 image = ImageTk.PhotoImage(image_size)
-canvas.create_image(600,350, image=image)
+canvas.create_image(600, 350, image=image)
 
 profile_file = Image.open("image/profile.png")
 profile_size = profile_file.resize((125, 75))
 profile = ImageTk.PhotoImage(profile_size)
-profile_player = canvas.create_image(80, 80, image = profile)
+profile_player = canvas.create_image(80, 80, image=profile)
 
-red_hp = canvas.create_rectangle(150,65,450,90, fill="red")
-green_hp = canvas.create_rectangle(150,65,FULL_HP,90, fill="#00dc00")
+red_hp = canvas.create_rectangle(150, 65, 450, 90, fill="red")
+green_hp = canvas.create_rectangle(150, 65, FULL_HP, 90, fill="#00dc00")
 
-nb_dm = canvas.create_text(100, 150, text = "Diamond: ", fill="white", font=("Irish Grover", 20))
-nb = canvas.create_text(175,150, text = DIAMOND, fill = "white", font = ("Irish Grover", 20))
+nb_dm = canvas.create_text(100, 150, text="Diamond: ", fill="white", font=("Irish Grover", 20))
+nb = canvas.create_text(175, 150, text=DIAMOND, fill="white", font=("Irish Grover", 20))
 
 play_file = Image.open("image/ninja_right.png")
 play_size = play_file.resize((55, 55))
@@ -62,7 +62,7 @@ play_left = ImageTk.PhotoImage(play_left_size)
 
 #-----------------diamond------------------------------------
 d1_file = Image.open("image/diamond.png")
-d1_size = d1_file.resize((35,35))
+d1_size = d1_file.resize((35, 35))
 d1 = ImageTk.PhotoImage(d1_size)
 dm1 = canvas.create_image(490,555, image=d1, tags="diamond")
 
@@ -75,42 +75,42 @@ dm2 = canvas.create_image(590,290, image=d2, tags="diamond")
 grass1_file = Image.open("image/grass.png")
 grass1_size = grass1_file.resize((200,55))
 grass1 = ImageTk.PhotoImage(grass1_size)
-block_grass1 = canvas.create_image(200,650, image=grass1, tags = "PLATFORM")
+block_grass1 = canvas.create_image(200, 650, image=grass1, tags="PLATFORM")
 
 grass2_file = Image.open("image/grass.png")
 grass2_size = grass2_file.resize((200,55))
 grass2 = ImageTk.PhotoImage(grass2_size)
-block_grass2 = canvas.create_image(450,595, image=grass2, tags = "PLATFORM")
+block_grass2 = canvas.create_image(450, 595, image=grass2, tags="PLATFORM")
 
 grass3_file = Image.open("image/grass.png")
 grass3_size = grass3_file.resize((100,55))
 grass3 = ImageTk.PhotoImage(grass3_size)
-block_grass3 = canvas.create_image(630,520, image=grass3, tags = "PLATFORM")
+block_grass3 = canvas.create_image(630, 520, image=grass3, tags="PLATFORM")
 
 grass4_file = Image.open("image/grass.png")
 grass4_size = grass4_file.resize((100,55))
 grass4 = ImageTk.PhotoImage(grass4_size)
-block_grass4 = canvas.create_image(750,585, image=grass4, tags = "PLATFORM")
+block_grass4 = canvas.create_image(750, 585, image=grass4, tags="PLATFORM")
 
 grass5_file = Image.open("image/grass.png")
 grass5_size = grass5_file.resize((150,55))
 grass5 = ImageTk.PhotoImage(grass5_size)
-block_grass5 = canvas.create_image(950,640, image=grass5, tags = "PLATFORM")
+block_grass5 = canvas.create_image(950, 640, image=grass5, tags="PLATFORM")
 
 grass6_file = Image.open("image/grass.png")
 grass6_size = grass6_file.resize((150,55))
 grass6 = ImageTk.PhotoImage(grass6_size)
-block_grass6 = canvas.create_image(1200,585, image=grass6, tags = "PLATFORM")
+block_grass6 = canvas.create_image(1200, 585, image=grass6, tags="PLATFORM")
 
 grass7_file = Image.open("image/grass.png")
 grass7_size = grass7_file.resize((200,55))
 grass7 = ImageTk.PhotoImage(grass7_size)
-block_grass7 = canvas.create_image(1100,420, image=grass7, tags = "PLATFORM")
+block_grass7 = canvas.create_image(1100, 420, image=grass7, tags="PLATFORM")
 
 grass8_file = Image.open("image/grass.png")
 grass8_size = grass8_file.resize((80,55))
 grass8 = ImageTk.PhotoImage(grass8_size)
-block_grass8 = canvas.create_image(1300,500, image=grass8, tags = "PLATFORM")
+block_grass8 = canvas.create_image(1300, 500, image=grass8, tags="PLATFORM")
 
 grass9_file = Image.open("image/grass.png")
 grass9_size = grass9_file.resize((100,55))
@@ -120,7 +120,7 @@ block_grass9 = canvas.create_image(900,420, image=grass9, tags = "PLATFORM")
 grass10_file = Image.open("image/grass.png")
 grass10_size = grass10_file.resize((500,55))
 grass10 = ImageTk.PhotoImage(grass10_size)
-block_grass10 = canvas.create_image(560,330, image=grass10, tags = "PLATFORM")
+block_grass10 = canvas.create_image(560, 330, image=grass10, tags="PLATFORM")
 
 grass11_file = Image.open("image/grass.png")
 grass11_size = grass11_file.resize((200,55))
@@ -134,14 +134,14 @@ block_grass12 = canvas.create_image(1250,150, image=grass12, tags = "PLATFORM")
 
 #----------------challange------------------------------
 thorns1_file = Image.open("image/thorns.png")
-thorns1_size = thorns1_file.resize((200,40))
+thorns1_size = thorns1_file.resize((200, 40))
 thorns1 = ImageTk.PhotoImage(thorns1_size)
-canvas.create_image(350,675, image=thorns1)
+canvas.create_image(350, 675, image=thorns1)
 
 fire1_file = Image.open("Image/fire2.png")
-fire1_size = fire1_file.resize((50,50))
+fire1_size = fire1_file.resize((50, 50))
 fire1 = ImageTk.PhotoImage(fire1_size)
-canvas.create_image(905, 610, image = fire1)
+canvas.create_image(905, 610, image=fire1)
 
 wall_id3 = canvas.create_rectangle(350, 300, 350, 300, outline="")
 wall_id4 = canvas.create_rectangle(700, 300, 700, 300, outline="")
@@ -165,7 +165,7 @@ def check_movement(dx=0, dy=0, checkGround=False):
         return False
 
     if checkGround:
-        overlap = canvas.find_overlapping(coord[0], coord[1], coord[0]+20+ dx , coord[1]+ 25 + dy)
+        overlap = canvas.find_overlapping(coord[0], coord[1], coord[0]+20 + dx, coord[1] + 20 + dy)
     else:
         overlap = canvas.find_overlapping(coord[0]+dx, coord[1]+dy, coord[0] - dx, coord[1] - play.width())
 
