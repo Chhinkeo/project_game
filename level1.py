@@ -73,58 +73,57 @@ dm2 = canvas.create_image(970,580, image=d2)
 d3_file = Image.open("image/diamond.png")
 d3_size = d3_file.resize((35,35))
 d3 = ImageTk.PhotoImage(d3_size)
-dm3 = canvas.create_image(1200,340, image=d3)
+dm3 = canvas.create_image(1165,340, image=d3)
 
 #---------stone block----------#
 grass1_file = Image.open("image/grass.png")
-grass1_size = grass1_file.resize((200,70))
+grass1_size = grass1_file.resize((200,55))
 grass1 = ImageTk.PhotoImage(grass1_size)
 block_grass1 = canvas.create_image(90,500, image=grass1, tags ="PLATFORM")
 
 grass2_file = Image.open("image/grass.png")
-grass2_size = grass2_file.resize((200,70))
+grass2_size = grass2_file.resize((200,55))
 grass2 = ImageTk.PhotoImage(grass2_size)
 block_grass2 = canvas.create_image(300,600, image=grass2, tags = "PLATFORM")
 
 
 grass3_file = Image.open("image/grass.png")
-grass3_size = grass3_file.resize((200,70))
+grass3_size = grass3_file.resize((200,55))
 grass3 = ImageTk.PhotoImage(grass3_size)
 block_grass3 = canvas.create_image(540,500, image=grass3, tags = "PLATFORM")
 
 
 grass4_file = Image.open("image/grass.png")
-grass4_size = grass4_file.resize((300,70))
+grass4_size = grass4_file.resize((300,55))
 grass4 = ImageTk.PhotoImage(grass4_size)
 block_grass4 = canvas.create_image(790,420, image=grass4, tags = "PLATFORM")
 
 
 grass5_file = Image.open("image/grass.png")
-grass5_size = grass4_file.resize((300,70))
+grass5_size = grass4_file.resize((300,55))
 grass5 = ImageTk.PhotoImage(grass5_size)
 block_grass5 = canvas.create_image(900,620, image=grass5, tags = "PLATFORM")
 
 
 grass6_file = Image.open("image/grass.png")
-grass6_size = grass6_file.resize((250,70))
+grass6_size = grass6_file.resize((250,55))
 grass6 = ImageTk.PhotoImage(grass6_size)
 block_grass6 = canvas.create_image(1150,510, image=grass6, tags = "PLATFORM")
 
 
 grass7_file = Image.open("image/grass.png")
-grass7_size = grass7_file.resize((250,70))
+grass7_size = grass7_file.resize((270,55))
 grass7 = ImageTk.PhotoImage(grass7_size)
-block_grass7 = canvas.create_image(1280,380, image=grass7, tags = "PLATFORM")
+block_grass7 = canvas.create_image(1250,380, image=grass7, tags = "PLATFORM")
 
 grass8_file = Image.open("image/grass.png")
 grass8_size = grass8_file.resize((150,60))
 grass8 = ImageTk.PhotoImage(grass8_size)
 block_grass8 = canvas.create_image(250,340, image=grass8, tags = "PLATFORM")
 
-
 #------challange---------
 
-canvas.create_rectangle(0,696,SCREEN_WIDTH, SCREEN_HEIGHT, fill="red", tags="PLATFORM")
+canvas.create_rectangle(0,697,SCREEN_WIDTH, SCREEN_HEIGHT, fill="red", tags="PLATFORM")
 
 bomp1_file = Image.open("image/bomp1.png")
 bomp_size = bomp1_file.resize((50,50))
@@ -161,6 +160,13 @@ thorn4_size = thorn4_file.resize((40,40))
 thorn4 = ImageTk.PhotoImage(thorn4_size)
 canvas.create_image(310,300, image=thorn4)
 
+# -----------------Win------------
+
+box_file= Image.open("image/box1.png")
+box_size = box_file.resize((180,130))
+box = ImageTk.PhotoImage(box_size)
+canvas.create_image(1300,330, image=box)
+
 #----------------function--------------
 
 def check_movement(dx=0, dy=0, checkGround=False):
@@ -179,6 +185,16 @@ def check_movement(dx=0, dy=0, checkGround=False):
         if platform in overlap:
             return False
     return True
+
+# =============
+# coord = canvas.coords(player)
+# platforms = canvas.fine_withtag("PLATFORM")
+# thorn1_file = canvas.find_withtag("lost")
+
+# for platform in thorn1_file:
+#     if platform in platforms:
+
+
 
 def jump(force):
     if force > 0:

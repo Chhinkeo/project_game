@@ -143,7 +143,7 @@ block_thorn1 = canvas.create_image(500, 440, image=thorn1, tags="PLATFORM")
 fire2_file = Image.open("image/fire1.png")
 fire2_size = fire2_file.resize((50, 40))
 fire2 = ImageTk.PhotoImage(fire2_size)
-block_fire2 = canvas.create_image(700, 283, image=fire2, tags="PLATFORM")
+block_fire2 = canvas.create_image(700, 283, image=fire2, tags="lost")
 
 
 
@@ -189,7 +189,52 @@ def check_movement(dx=0, dy=0, checkGround=False):
     for platform in platforms:
         if platform in overlap:
             return False
+#  ==================================================   
+    coord = canvas.coords(player)
+    # coord = canvas.coords(denger)
+    # coord = canvas.coords(beers)
+    platforms = canvas.find_withtag("PLATFORM")
+    fire2_fileu  = canvas.find_withtag("lost")
+    # loser = canvas.find_withtag("lost")
+    # drink = canvas.find_withtag("beer")
+    # ===============1
+    for plf in fire2_fileu :
+        if plf in overlap:
+            check_loster()
+            print("ok")
+    for plf in fire2_fileu :
+        if plf in overlap:
+            return False
+    for platform in platforms:
+        if platform in overlap:
+            return False
+    # ========================2
+    # for plf in loser:
+    #     if plf in overlap:
+    #         check_loster()
+    #         lost_sond()
+
+    # for platform in platforms:
+    #     if platform in overlap:
+    #         return False
+                
+    # ========================3
+    # for plf in drink:
+    #     if plf in overlap:
+    #         drink_beer()    
+    # for platform in platforms:
+    #     if platform in overlap:
+
+    #     return False
+    # =========================
+        
+
     return True
+
+# =========================================
+
+
+
 
 def jump(force):
     if force > 0:
@@ -287,6 +332,15 @@ def grass_left():
         canvas.after(10, grass_left)
     else:
         grass_right()
+
+
+# =============================
+def check_loster():
+        
+        # canvas.create_image(0,0,image=leve_image,anchor=NW)
+        canvas.create_text(520,300,text="YOU LOST!",font=('212BabyGirl', 50 ,'bold'),fill='white')
+        canvas.create_text(550, 450, text="TRY AGAIN?", font=('212BabyGirl', 50 ,'bold'),fill='white')
+# ===================================
 
 # def gravity_down():
 #     ball_coords = canvas.coords(block_grass10)
