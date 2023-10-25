@@ -27,11 +27,11 @@ canvas = tk.Canvas(frame, width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
 canvas.pack()
 bg = Image.open("image/home.jpg")
 image = ImageTk.PhotoImage(bg)
-canvas.create_image(600,450, image=image)
+canvas.create_image(600, 450, image=image)
 
 title = Image.open("image/name_game.png")
 i = ImageTk.PhotoImage(title)
-canvas.create_image(400,150, image=i)
+canvas.create_image(400, 150, image=i)
 
 # def btn1_click():
 #     canvas.create_rectangle(10,10,100,100,fill='red')
@@ -40,9 +40,9 @@ canvas.create_image(400,150, image=i)
 
 
 btn = Image.open("image/btn_play.png")
-btn_size = btn.resize((300,100))
+btn_size = btn.resize((300, 100))
 btn1 = ImageTk.PhotoImage(btn_size)
-btn_click = canvas.create_image(400,300, image = btn1)
+btn_click = canvas.create_image(400, 300, image=btn1)
 
 
 window.mainloop()
