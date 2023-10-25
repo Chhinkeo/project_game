@@ -52,9 +52,10 @@ red_hp = canvas.create_rectangle(150, 65, 450, 90, fill="red")
 green_hp = canvas.create_rectangle(150, 65, FULL_HP, 90, fill="#00dc00")
 
 
+# ----dellet 1 line------
+nb_dm = canvas.create_text(100, 150, text="Diamond: 0", fill="white", font=("Irish Grover", 20))
 
-nb_dm = canvas.create_text(100, 150, text="Diamond: ", fill="white", font=("Irish Grover", 20))
-nb = canvas.create_text(175, 150, text=DIAMOND, fill="white", font=("Irish Grover", 20))
+
 
 play_file = Image.open("image/ninja_right.png")
 play_size = play_file.resize((55, 55))
@@ -147,9 +148,9 @@ d1_file = Image.open("image/diamond.png")
 d1_size = d1_file.resize((35, 35))
 diamond = ImageTk.PhotoImage(d1_size)
 
-dm1 = canvas.create_image(260, 400, image=diamond)
-dm2 = canvas.create_image(550, 260, image=diamond)
-dm3 = canvas.create_image(820, 70, image=diamond)
+dm1 = canvas.create_image(260, 400, image=diamond, tags = "diamond")
+dm2 = canvas.create_image(550, 260, image=diamond, tags = "diamond")
+dm3 = canvas.create_image(820, 70, image=diamond, tags = "diamond")
 
 #----------------------------------function---------------------------------------
 def check_movement(dx=0, dy=0, checkGround=False):
@@ -168,53 +169,33 @@ def check_movement(dx=0, dy=0, checkGround=False):
         if platform in overlap:
             return False
 
-    coord = canvas.coords(player)
-    # coord = canvas.coords(denger)
-    # coord = canvas.coords(beers)
-    platforms = canvas.find_withtag("PLATFORM")
-    wonner = canvas.find_withtag("won")
-    # loser = canvas.find_withtag("lost")
-    # drink = canvas.find_withtag("beer")
-    # ===============1
-    for plf in wonner:
-        if plf in overlap:
-            global FULL_HP
-            # check_winner()
-            FULL_HP -= 50
-
-            print(FULL_HP)
-    for plf in wonner:
-        if plf in overlap:
-            return False
-    for platform in platforms:
-        if platform in overlap:
-            return False
-    # ========================2
-    # for plf in loser:
+    # coord = canvas.coords(player)
+    # platforms = canvas.find_withtag("PLATFORM")
+    # wonner = canvas.find_withtag("won")
+    # for plf in wonner:
     #     if plf in overlap:
-    #         check_loster()
-    #         lost_sond()
+    #         global FULL_HP
+    #         # check_winner()
+    #         FULL_HP -= 50
     #
+    #         print(FULL_HP)
+    # for plf in wonner:
+    #     if plf in overlap:
+    #         return False
     # for platform in platforms:
     #     if platform in overlap:
     #         return False
 
-    # ========================3
-    # for plf in drink:
-    #     if plf in overlap:
-    #         drink_beer()
-            # for platform in platforms:
-    #     if platform in overlap:
-
-    #         return False
-    # =========================
-
-
-
     return True
-# def hp():
-
-
+#----------player to check diamond---------
+def check_move_dimond():
+    coord = canvas.coords(player)
+    platforms = canvas.find_withtag("diamond")
+    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0] + play.width() , coord[1] + play.height() )
+    for platform in platforms:
+        if platform in overlap:
+            return platform
+    return 0
 def jump(force):
     if force > 0:
         if check_movement(0, -force):
@@ -228,6 +209,7 @@ def start_move(event):
             move()
 
 def move():
+    global DIAMOND
     if not keyPressed == []:
         x = 0
         if "Left" in keyPressed:
@@ -241,7 +223,15 @@ def move():
         if check_movement(x):
             canvas.move(player, x, 0)
         window.after(TIMED_LOOP, move)
-        
+
+        #--------plerc diamond-------
+        dimond_id = check_move_dimond()
+        if dimond_id > 0:
+            DIAMOND += 1
+            canvas.itemconfig(nb_dm, text="Diamond: " + str(DIAMOND))
+            #--------dellet diamond---------
+            canvas.delete("dimond_id")
+
 def gravity():
     if check_movement(0, GRAVITY_FORCE, True):
         canvas.move(player, 0, GRAVITY_FORCE)
@@ -306,9 +296,7 @@ def grass_left():
         canvas.move(block_grass3, -1, 0)
         canvas.after(10, grass_left)
     else:
-        grass_right()
-
-
+        grass_right() 
 
 # def gravity_down():
 #     ball_coords = canvas.coords(block_grass5)
