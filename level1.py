@@ -63,17 +63,17 @@ play_left = ImageTk.PhotoImage(play_left_size)
 d1_file = Image.open("image/diamond.png")
 d1_size = d1_file.resize((35, 35))
 d1 = ImageTk.PhotoImage(d1_size)
-dm1 = canvas.create_image(300, 566, image=d1)
+dm1 = canvas.create_image(300, 558, image=d1)
 
 d2_file = Image.open("image/diamond.png")
 d2_size = d2_file.resize((35, 35))
 d2 = ImageTk.PhotoImage(d2_size)
-dm2 = canvas.create_image(960, 586, image=d2)
+dm2 = canvas.create_image(960, 578, image=d2)
 
 d3_file = Image.open("image/diamond.png")
 d3_size = d3_file.resize((35, 35))
 d3 = ImageTk.PhotoImage(d3_size)
-dm3 = canvas.create_image(1175,346, image=d3)
+dm3 = canvas.create_image(1175,338, image=d3)
 
 #---------stone block----------#
 grass1_file = Image.open("image/grass.png")
