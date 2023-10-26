@@ -252,7 +252,7 @@ def move():
         dimond_id = check_move_dimond()
         if dimond_id > 0:
             DIAMOND += 1
-                canvas.itemconfig(nb_dm, text="Diamond: " + str(DIAMOND))
+            canvas.itemconfig(nb_dm, text="Diamond: " + str(DIAMOND))
             #--------dellet diamond---------
             canvas.delete("dimond_id")
 
