@@ -134,9 +134,33 @@ grass3_size = grass1_file.resize((100, 70))
 grass3 = ImageTk.PhotoImage(grass3_size)
 block_grass3 = canvas.create_image(225, 460, image=grass3, tags="PLATFORM")
 
-grass5_size = grass1_file.resize((100, 100))
-grass5 = ImageTk.PhotoImage(grass5_size)
-block_grass5 = canvas.create_image(230, 230, image=grass5, tags="PLATFORM")
+#------------------fire block---------------------------------
+
+
+fire2_file = Image.open("image/fire1.png")
+fire2_size = fire2_file.resize((50, 40))
+fire2 = ImageTk.PhotoImage(fire2_size)
+block_fire2 = canvas.create_image(700, 283, image=fire2, tags="lost")
+
+
+
+
+
+
+#------------------enemy block---------------------------------
+
+
+enemy_l_file = Image.open("image/enemy_right.png")
+enemy_l_size = enemy_l_file.resize((100, 80))
+enemy_l = ImageTk.PhotoImage(enemy_l_size)
+
+enemy_r_file = Image.open("image/enemy_left.png")
+enemy_r_size = enemy_r_file.resize((100, 80))
+enemy_r = ImageTk.PhotoImage(enemy_r_size)
+team_enemy = canvas.create_image(700, 585, image=enemy_r, tags="PLATFORM")
+
+
+#----------------challange------------------------------
 
 wall_grass1_file = Image.open("image/wall_grass.jpg")
 wall_grass1_size = wall_grass1_file.resize((100, 300))
@@ -228,7 +252,7 @@ def move():
         dimond_id = check_move_dimond()
         if dimond_id > 0:
             DIAMOND += 1
-            canvas.itemconfig(nb_dm, text="Diamond: " + str(DIAMOND))
+                canvas.itemconfig(nb_dm, text="Diamond: " + str(DIAMOND))
             #--------dellet diamond---------
             canvas.delete("dimond_id")
 

@@ -64,63 +64,73 @@ play_left = ImageTk.PhotoImage(play_left_size)
 d1_file = Image.open("image/diamond.png")
 d1_size = d1_file.resize((35, 35))
 d1 = ImageTk.PhotoImage(d1_size)
-dm1 = canvas.create_image(490, 560, image=d1)
+dm1 = canvas.create_image(490,555, image=d1, tags="diamond")
 
 d2_file = Image.open("image/diamond.png")
-d2_size = d2_file.resize((35, 35))
-d2 = ImageTk.PhotoImage(d1_size)
-dm = canvas.create_image(490, 560, image=d1)
+d2_size = d2_file.resize((35,35))
+d2 = ImageTk.PhotoImage(d2_size)
+dm2 = canvas.create_image(590,290, image=d2, tags="diamond")
 
 #------------------grass block---------------------------------
 grass1_file = Image.open("image/grass.png")
-grass1_size = grass1_file.resize((200, 70))
+grass1_size = grass1_file.resize((200,55))
 grass1 = ImageTk.PhotoImage(grass1_size)
 block_grass1 = canvas.create_image(200, 650, image=grass1, tags="PLATFORM")
 
 grass2_file = Image.open("image/grass.png")
-grass2_size = grass2_file.resize((200, 70))
+grass2_size = grass2_file.resize((200,55))
 grass2 = ImageTk.PhotoImage(grass2_size)
 block_grass2 = canvas.create_image(450, 595, image=grass2, tags="PLATFORM")
 
 grass3_file = Image.open("image/grass.png")
-grass3_size = grass3_file.resize((100, 70))
+grass3_size = grass3_file.resize((100,55))
 grass3 = ImageTk.PhotoImage(grass3_size)
 block_grass3 = canvas.create_image(630, 520, image=grass3, tags="PLATFORM")
 
 grass4_file = Image.open("image/grass.png")
-grass4_size = grass4_file.resize((100, 70))
+grass4_size = grass4_file.resize((100,55))
 grass4 = ImageTk.PhotoImage(grass4_size)
 block_grass4 = canvas.create_image(750, 585, image=grass4, tags="PLATFORM")
 
 grass5_file = Image.open("image/grass.png")
-grass5_size = grass5_file.resize((150, 70))
+grass5_size = grass5_file.resize((150,55))
 grass5 = ImageTk.PhotoImage(grass5_size)
 block_grass5 = canvas.create_image(950, 640, image=grass5, tags="PLATFORM")
 
 grass6_file = Image.open("image/grass.png")
-grass6_size = grass6_file.resize((150, 70))
+grass6_size = grass6_file.resize((150,55))
 grass6 = ImageTk.PhotoImage(grass6_size)
 block_grass6 = canvas.create_image(1200, 585, image=grass6, tags="PLATFORM")
 
 grass7_file = Image.open("image/grass.png")
-grass7_size = grass7_file.resize((200, 70))
+grass7_size = grass7_file.resize((200,55))
 grass7 = ImageTk.PhotoImage(grass7_size)
 block_grass7 = canvas.create_image(1100, 420, image=grass7, tags="PLATFORM")
 
 grass8_file = Image.open("image/grass.png")
-grass8_size = grass8_file.resize((80, 70))
+grass8_size = grass8_file.resize((80,55))
 grass8 = ImageTk.PhotoImage(grass8_size)
 block_grass8 = canvas.create_image(1300, 500, image=grass8, tags="PLATFORM")
 
 grass9_file = Image.open("image/grass.png")
-grass9_size = grass9_file.resize((100, 70))
+grass9_size = grass9_file.resize((100,55))
 grass9 = ImageTk.PhotoImage(grass9_size)
-block_grass9 = canvas.create_image(900, 400, image=grass9, tags="PLATFORM")
+block_grass9 = canvas.create_image(900,420, image=grass9, tags = "PLATFORM")
 
 grass10_file = Image.open("image/grass.png")
-grass10_size = grass10_file.resize((500, 80))
+grass10_size = grass10_file.resize((500,55))
 grass10 = ImageTk.PhotoImage(grass10_size)
 block_grass10 = canvas.create_image(560, 330, image=grass10, tags="PLATFORM")
+
+grass11_file = Image.open("image/grass.png")
+grass11_size = grass11_file.resize((200,55))
+grass11 = ImageTk.PhotoImage(grass11_size)
+block_grass11 = canvas.create_image(990,230, image=grass11, tags = "PLATFORM")
+
+grass12_file = Image.open("image/grass.png")
+grass12_size = grass12_file.resize((350,55))
+grass12 = ImageTk.PhotoImage(grass12_size)
+block_grass12 = canvas.create_image(1250,150, image=grass12, tags = "PLATFORM")
 
 #----------------challange------------------------------
 thorns1_file = Image.open("image/thorns.png")
@@ -144,6 +154,7 @@ enemy_r_file = Image.open("image/enemy_l.png")
 enemy_r_size = enemy_r_file.resize((100, 80))
 enemy_r = ImageTk.PhotoImage(enemy_r_size)
 team_enemy = canvas.create_image(700, 265, image=enemy_r, tags="PLATFORM")
+
 #-----------------function-------------------------------
 
 def check_movement(dx=0, dy=0, checkGround=False):
@@ -189,6 +200,11 @@ def move():
         if check_movement(x):
             canvas.move(player, x, 0)
         window.after(TIMED_LOOP, move)
+    diamond_id = get_diamond()
+    if diamond_id>0:
+        coord = canvas.coords(diamond_id)
+        canvas.delete(diamond_id)   
+        print(DIAMOND)    
         
 def gravity():
     if check_movement(0, GRAVITY_FORCE, True):
@@ -201,6 +217,7 @@ def stop_move(event):
         keyPressed.remove(event.keysym)
 
 gravity()
+
 def gravity_right():
     ball2_coords = canvas.coords(team_enemy)
     wall4_coords = canvas.coords(wall_id4)
@@ -222,6 +239,17 @@ def gravity_left():
     else:
         gravity_right()
 gravity_right()
+
+def get_diamond():
+    coord = canvas.coords(player)
+    diamonds = canvas.find_withtag("diamond")
+    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0]+ play.width(),coord[1]+play.height())
+    for dm in diamonds:
+        if dm in overlap:
+            global DIAMOND
+            DIAMOND += 1
+            return dm
+        return 0
 
 window.bind("<Key>", start_move)
 window.bind("<KeyRelease>", stop_move)
