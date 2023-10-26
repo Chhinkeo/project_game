@@ -255,6 +255,10 @@ def move():
             canvas.itemconfig(nb_dm, text="Diamond: " + str(DIAMOND))
             #--------dellet diamond---------
             canvas.delete("dimond_id")
+        diamond_id = get_diamond()
+        if diamond_id>0:
+            coord = canvas.coords(diamond_id)
+            canvas.delete(diamond_id) 
 
 def gravity():
     if check_movement(0, GRAVITY_FORCE, True):
@@ -346,6 +350,15 @@ gravity()
 gravity_right()
 enemy_right()
 grass_right()
+
+def get_diamond():
+    coord = canvas.coords(player)
+    diamonds = canvas.find_withtag("diamond")
+    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0]+ play.width(),coord[1]+play.height())
+    for dm in diamonds:
+        if dm in overlap:
+            return dm
+        return 0
 
 window.bind("<Key>", start_move)
 window.bind("<KeyRelease>", stop_move)

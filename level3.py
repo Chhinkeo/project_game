@@ -204,7 +204,7 @@ def move():
     if diamond_id>0:
         coord = canvas.coords(diamond_id)
         canvas.delete(diamond_id)   
-        print(DIAMOND)    
+            
         
 def gravity():
     if check_movement(0, GRAVITY_FORCE, True):
@@ -246,8 +246,6 @@ def get_diamond():
     overlap = canvas.find_overlapping(coord[0], coord[1], coord[0]+ play.width(),coord[1]+play.height())
     for dm in diamonds:
         if dm in overlap:
-            global DIAMOND
-            DIAMOND += 1
             return dm
         return 0
 
