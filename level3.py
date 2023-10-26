@@ -48,8 +48,8 @@ profile_player = canvas.create_image(80, 80, image=profile)
 red_hp = canvas.create_rectangle(150, 65, 450, 90, fill="red")
 green_hp = canvas.create_rectangle(150, 65, FULL_HP, 90, fill="#00dc00")
 
-nb_dm = canvas.create_text(100, 150, text="Diamond: ", fill="white", font=("Irish Grover", 20))
-nb = canvas.create_text(175, 150, text=DIAMOND, fill="white", font=("Irish Grover", 20))
+nb_dm = canvas.create_text(100, 150, text="Diamond: 0", fill="white", font=("Irish Grover", 20))
+# nb = canvas.create_text(175, 150, text=DIAMOND, fill="white", font=("Irish Grover", 20))
 
 play_file = Image.open("image/ninja_right.png")
 play_size = play_file.resize((55, 55))
@@ -173,6 +173,14 @@ def check_movement(dx=0, dy=0, checkGround=False):
         if platform in overlap:
             return False
     return True
+def check_move_dimond():
+    coord = canvas.coords(player)
+    platforms = canvas.find_withtag("diamond")
+    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0] + play.width() , coord[1] + play.height() )
+    for platform in platforms:
+        if platform in overlap:
+            return platform
+    return 0
 
 def jump(force):
     if force > 0:
@@ -187,6 +195,7 @@ def start_move(event):
             move()
 
 def move():
+    global DIAMOND
     if not keyPressed == []:
         x = 0
         if "Left" in keyPressed:
@@ -200,6 +209,12 @@ def move():
         if check_movement(x):
             canvas.move(player, x, 0)
         window.after(TIMED_LOOP, move)
+    dimond_id = check_move_dimond()
+    if dimond_id > 0:
+        DIAMOND += 1
+        canvas.itemconfig(nb_dm, text="Diamond: " + str(DIAMOND))
+        # --------dellet diamond---------
+        canvas.delete("dimond_id")
     diamond_id = get_diamond()
     if diamond_id>0:
         coord = canvas.coords(diamond_id)

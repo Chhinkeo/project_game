@@ -48,8 +48,7 @@ profile_player = canvas.create_image(80, 80, image=profile)
 red_hp = canvas.create_rectangle(150, 65, 450, 90, fill="red")
 green_hp = canvas.create_rectangle(150, 65, FULL_HP, 90, fill="#00dc00")
 
-nb_dm = canvas.create_text(100, 150, text="Diamond:", fill="white", font=("Irish Grover", 20))
-nb = canvas.create_text(175, 150, text=DIAMOND, fill="white", font=("Irish Grover", 20))
+nb_dm = canvas.create_text(100, 150, text="Diamond: 0", fill="white", font=("Irish Grover", 20))
 
 play_file = Image.open("image/ninja_right.png")
 play_size = play_file.resize((55, 55))
@@ -63,17 +62,29 @@ play_left = ImageTk.PhotoImage(play_left_size)
 d1_file = Image.open("image/diamond.png")
 d1_size = d1_file.resize((35, 35))
 d1 = ImageTk.PhotoImage(d1_size)
+<<<<<<< HEAD
 dm1 = canvas.create_image(300, 558, image=d1)
+=======
+dm1 = canvas.create_image(300, 566, image=d1, tags="diamond")
+>>>>>>> d08dd36d8f3197bc4db6d5722dbe877610b0c139
 
 d2_file = Image.open("image/diamond.png")
 d2_size = d2_file.resize((35, 35))
 d2 = ImageTk.PhotoImage(d2_size)
+<<<<<<< HEAD
 dm2 = canvas.create_image(960, 578, image=d2)
+=======
+dm2 = canvas.create_image(960, 586, image=d2, tags="diamond")
+>>>>>>> d08dd36d8f3197bc4db6d5722dbe877610b0c139
 
 d3_file = Image.open("image/diamond.png")
 d3_size = d3_file.resize((35, 35))
 d3 = ImageTk.PhotoImage(d3_size)
+<<<<<<< HEAD
 dm3 = canvas.create_image(1175,338, image=d3)
+=======
+dm3 = canvas.create_image(1175,346, image=d3, tags="diamond")
+>>>>>>> d08dd36d8f3197bc4db6d5722dbe877610b0c139
 
 #---------stone block----------#
 grass1_file = Image.open("image/grass.png")
@@ -186,6 +197,7 @@ def check_movement(dx=0, dy=0, checkGround=False):
             return False
     return True
 
+
 # =============
 # coord = canvas.coords(player)
 # platforms = canvas.fine_withtag("PLATFORM")
@@ -194,7 +206,14 @@ def check_movement(dx=0, dy=0, checkGround=False):
 # for platform in thorn1_file:
 #     if platform in platforms:
 
-
+def check_move_dimond():
+    coord = canvas.coords(player)
+    platforms = canvas.find_withtag("diamond")
+    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0] + play.width() , coord[1] + play.height() )
+    for platform in platforms:
+        if platform in overlap:
+            return platform
+    return 0
 
 def jump(force):
     if force > 0:
@@ -209,6 +228,7 @@ def start_move(event):
             move()
 
 def move():
+    global DIAMOND
     if not keyPressed == []:
         x = 0
         if "Left" in keyPressed:
@@ -222,6 +242,19 @@ def move():
         if check_movement(x):
             canvas.move(player, x, 0)
         window.after(TIMED_LOOP, move)
+    dimond_id = check_move_dimond()
+    if dimond_id > 0:
+        DIAMOND += 1
+        canvas.itemconfig(nb_dm, text="Diamond: " + str(DIAMOND))
+            #--------dellet diamond---------
+        canvas.delete("dimond_id")
+    diamond_id = get_diamond()
+    if diamond_id>0:
+        coord = canvas.coords(diamond_id)
+        canvas.delete(diamond_id)   
+            
+
+
         
 def gravity():
     if check_movement(0, GRAVITY_FORCE, True):
@@ -235,6 +268,15 @@ def stop_move(event):
 
 gravity()
 
+def get_diamond():
+    coord = canvas.coords(player)
+    diamonds = canvas.find_withtag("diamond")
+    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0]+ play.width(),coord[1]+play.height())
+    for dm in diamonds:
+        if dm in overlap:
+            return dm
+        return 0
+    
 window.bind("<Key>", start_move)
 window.bind("<KeyRelease>", stop_move)
 
