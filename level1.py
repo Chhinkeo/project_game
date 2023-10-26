@@ -63,17 +63,17 @@ play_left = ImageTk.PhotoImage(play_left_size)
 d1_file = Image.open("image/diamond.png")
 d1_size = d1_file.resize((35, 35))
 d1 = ImageTk.PhotoImage(d1_size)
-dm1 = canvas.create_image(300, 566, image=d1)
+dm1 = canvas.create_image(300, 566, image=d1, tags="diamond")
 
 d2_file = Image.open("image/diamond.png")
 d2_size = d2_file.resize((35, 35))
 d2 = ImageTk.PhotoImage(d2_size)
-dm2 = canvas.create_image(960, 586, image=d2)
+dm2 = canvas.create_image(960, 586, image=d2, tags="diamond")
 
 d3_file = Image.open("image/diamond.png")
 d3_size = d3_file.resize((35, 35))
 d3 = ImageTk.PhotoImage(d3_size)
-dm3 = canvas.create_image(1175,346, image=d3)
+dm3 = canvas.create_image(1175,346, image=d3, tags="diamond")
 
 #---------stone block----------#
 grass1_file = Image.open("image/grass.png")
@@ -223,6 +223,11 @@ def move():
         if check_movement(x):
             canvas.move(player, x, 0)
         window.after(TIMED_LOOP, move)
+    diamond_id = get_diamond()
+    if diamond_id>0:
+        coord = canvas.coords(diamond_id)
+        canvas.delete(diamond_id)   
+            
 
 
         
@@ -238,6 +243,15 @@ def stop_move(event):
 
 gravity()
 
+def get_diamond():
+    coord = canvas.coords(player)
+    diamonds = canvas.find_withtag("diamond")
+    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0]+ play.width(),coord[1]+play.height())
+    for dm in diamonds:
+        if dm in overlap:
+            return dm
+        return 0
+    
 window.bind("<Key>", start_move)
 window.bind("<KeyRelease>", stop_move)
 
