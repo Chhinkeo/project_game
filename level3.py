@@ -49,7 +49,6 @@ red_hp = canvas.create_rectangle(150, 65, 450, 90, fill="red")
 green_hp = canvas.create_rectangle(150, 65, FULL_HP, 90, fill="#00dc00")
 
 nb_dm = canvas.create_text(100, 150, text="Diamond: 0", fill="white", font=("Irish Grover", 20))
-# nb = canvas.create_text(175, 150, text=DIAMOND, fill="white", font=("Irish Grover", 20))
 
 play_file = Image.open("image/ninja_right.png")
 play_size = play_file.resize((55, 55))
@@ -60,6 +59,11 @@ play_left_file = Image.open("image/ninja_left.png")
 play_left_size = play_left_file.resize((55, 55))
 play_left = ImageTk.PhotoImage(play_left_size)
 
+temple_file = Image.open("image/win.png")
+temple_size = temple_file.resize((60,60))
+temple = ImageTk.PhotoImage(temple_size)
+temple_win = canvas.create_image(1250,95, image=temple)
+
 #-----------------diamond------------------------------------
 d1_file = Image.open("image/diamond.png")
 d1_size = d1_file.resize((35, 35))
@@ -69,7 +73,12 @@ dm1 = canvas.create_image(490,555, image=d1, tags="diamond")
 d2_file = Image.open("image/diamond.png")
 d2_size = d2_file.resize((35,35))
 d2 = ImageTk.PhotoImage(d2_size)
-dm2 = canvas.create_image(590,290, image=d2, tags="diamond")
+dm2 = canvas.create_image(1100,380, image=d2, tags="diamond")
+
+d3_file = Image.open("image/diamond.png")
+d3_size = d3_file.resize((35,35))
+d3 = ImageTk.PhotoImage(d3_size)
+dm3 = canvas.create_image(500,290, image=d3, tags="diamond")
 
 #------------------grass block---------------------------------
 grass1_file = Image.open("image/grass.png")
@@ -138,10 +147,45 @@ thorns1_size = thorns1_file.resize((200, 40))
 thorns1 = ImageTk.PhotoImage(thorns1_size)
 canvas.create_image(350, 675, image=thorns1)
 
+thorns2_file = Image.open("image/thorns.png")
+thorns2_size = thorns2_file.resize((200, 40))
+thorns2 = ImageTk.PhotoImage(thorns2_size)
+canvas.create_image(500, 675, image=thorns2)
+
+thorns3_file = Image.open("image/thorns.png")
+thorns3_size = thorns3_file.resize((200, 40))
+thorns3 = ImageTk.PhotoImage(thorns3_size)
+canvas.create_image(650, 675, image=thorns3)
+
+thorns4_file = Image.open("image/thorns.png")
+thorns4_size = thorns4_file.resize((200, 40))
+thorns4 = ImageTk.PhotoImage(thorns4_size)
+canvas.create_image(800, 675, image=thorns4)
+
+thorns5_file = Image.open("image/thorns.png")
+thorns5_size = thorns5_file.resize((200, 40))
+thorns5 = ImageTk.PhotoImage(thorns5_size)
+canvas.create_image(950, 675, image=thorns5)
+
+thorns6_file = Image.open("image/thorns.png")
+thorns6_size = thorns6_file.resize((200, 40))
+thorns6 = ImageTk.PhotoImage(thorns6_size)
+canvas.create_image(1100, 675, image=thorns6)
+
+thorns7_file = Image.open("image/thorns.png")
+thorns7_size = thorns7_file.resize((200, 40))
+thorns7 = ImageTk.PhotoImage(thorns7_size)
+canvas.create_image(1250, 675, image=thorns7)
+
 fire1_file = Image.open("Image/fire2.png")
 fire1_size = fire1_file.resize((50, 50))
 fire1 = ImageTk.PhotoImage(fire1_size)
 canvas.create_image(905, 610, image=fire1)
+
+fire2_file = Image.open("image/fire2.png")
+fire2_size = fire2_file.resize((50,50))
+fire2 = ImageTk.PhotoImage(fire2_size)
+canvas.create_image(700,290, image=fire2)
 
 wall_id3 = canvas.create_rectangle(350, 300, 350, 300, outline="")
 wall_id4 = canvas.create_rectangle(700, 300, 700, 300, outline="")
@@ -213,13 +257,11 @@ def move():
     if dimond_id > 0:
         DIAMOND += 1
         canvas.itemconfig(nb_dm, text="Diamond: " + str(DIAMOND))
-        # --------dellet diamond---------
         canvas.delete("dimond_id")
     diamond_id = get_diamond()
     if diamond_id>0:
         coord = canvas.coords(diamond_id)
         canvas.delete(diamond_id)   
-            
         
 def gravity():
     if check_movement(0, GRAVITY_FORCE, True):
