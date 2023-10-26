@@ -48,7 +48,7 @@ profile_player = canvas.create_image(80, 80, image=profile)
 red_hp = canvas.create_rectangle(150, 65, 450, 90, fill="red")
 green_hp = canvas.create_rectangle(150, 65, FULL_HP, 90, fill="#00dc00")
 
-nb_dm = canvas.create_text(100, 150, text="Diamond:", fill="white", font=("Irish Grover", 20))
+nb_dm = canvas.create_text(100, 150, text="Diamond: 0", fill="white", font=("Irish Grover", 20))
 nb = canvas.create_text(175, 150, text=DIAMOND, fill="white", font=("Irish Grover", 20))
 
 play_file = Image.open("image/ninja_right.png")
@@ -186,6 +186,7 @@ def check_movement(dx=0, dy=0, checkGround=False):
             return False
     return True
 
+
 # =============
 # coord = canvas.coords(player)
 # platforms = canvas.fine_withtag("PLATFORM")
@@ -222,6 +223,8 @@ def move():
         if check_movement(x):
             canvas.move(player, x, 0)
         window.after(TIMED_LOOP, move)
+
+
         
 def gravity():
     if check_movement(0, GRAVITY_FORCE, True):

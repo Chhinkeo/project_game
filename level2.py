@@ -68,26 +68,27 @@ play_left = ImageTk.PhotoImage(play_left_size)
 
 #-----------------------------------grass block-------------------------------------
 grass1_file = Image.open("image/grass.png")
+grass2_file = Image.open("image/grass 2.png")
 
 grass1_size = grass1_file.resize((600, 70))
 grass1 = ImageTk.PhotoImage(grass1_size)
 block_grass1 = canvas.create_image(30, 680, image=grass1, tags="PLATFORM")
 
-grass2_size = grass1_file.resize((150, 120))
+grass2_size = grass1_file.resize((130, 83))
 grass2 = ImageTk.PhotoImage(grass2_size)
 block_grass2 = canvas.create_image(450, 580, image=grass2, tags="PLATFORM")
 
-grass4_size = grass1_file.resize((100, 100))
+grass4_size = grass1_file.resize((100, 70))
 grass4 = ImageTk.PhotoImage(grass4_size)
 block_grass4 = canvas.create_image(50, 350, image=grass4, tags="PLATFORM")
 
-grass6_size = grass1_file.resize((160, 70))
+grass6_size = grass1_file.resize((140, 55))
 grass6 = ImageTk.PhotoImage(grass6_size)
 block_grass6 =canvas.create_image(475, 320, image=grass6, tags="PLATFORM")
 
-grass7_size = grass1_file.resize((160, 70))
+grass7_size = grass2_file.resize((140, 55))
 grass7 = ImageTk.PhotoImage(grass7_size)
-block_grass7 =canvas.create_image(625, 320, image=grass7, tags="PLATFORM")
+block_grass7 =canvas.create_image(620, 320, image=grass7, tags="PLATFORM")
 
 grass8_size = grass1_file.resize((150, 25))
 grass8 = ImageTk.PhotoImage(grass8_size)
@@ -133,6 +134,10 @@ block_thorn1 = canvas.create_image(500, 440, image=thorn1, tags="PLATFORM")
 grass3_size = grass1_file.resize((100, 70))
 grass3 = ImageTk.PhotoImage(grass3_size)
 block_grass3 = canvas.create_image(225, 460, image=grass3, tags="PLATFORM")
+
+grass5_size = grass1_file.resize((100, 70))
+grass5 = ImageTk.PhotoImage(grass5_size)
+block_grass5 = canvas.create_image(250, 230, image=grass5, tags="PLATFORM")
 
 #------------------fire block---------------------------------
 
@@ -193,23 +198,6 @@ def check_movement(dx=0, dy=0, checkGround=False):
         if platform in overlap:
             return False
 
-    # coord = canvas.coords(player)
-    # platforms = canvas.find_withtag("PLATFORM")
-    # wonner = canvas.find_withtag("won")
-    # for plf in wonner:
-    #     if plf in overlap:
-    #         global FULL_HP
-    #         # check_winner()
-    #         FULL_HP -= 50
-    #
-    #         print(FULL_HP)
-    # for plf in wonner:
-    #     if plf in overlap:
-    #         return False
-    # for platform in platforms:
-    #     if platform in overlap:
-    #         return False
-
     return True
 #----------player to check diamond---------
 def check_move_dimond():
@@ -256,7 +244,7 @@ def move():
             #--------dellet diamond---------
             canvas.delete("dimond_id")
         diamond_id = get_diamond()
-        if diamond_id>0:
+        if diamond_id > 0:
             coord = canvas.coords(diamond_id)
             canvas.delete(diamond_id) 
 
@@ -344,13 +332,6 @@ def grass_left():
 #     else:
 #         gravity_down()
 
-
-gravity()
-# gravity_down()
-gravity_right()
-enemy_right()
-grass_right()
-
 def get_diamond():
     coord = canvas.coords(player)
     diamonds = canvas.find_withtag("diamond")
@@ -359,6 +340,15 @@ def get_diamond():
         if dm in overlap:
             return dm
         return 0
+
+
+gravity()
+# gravity_down()
+gravity_right()
+enemy_right()
+grass_right()
+
+
 
 window.bind("<Key>", start_move)
 window.bind("<KeyRelease>", stop_move)
